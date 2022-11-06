@@ -1,48 +1,88 @@
-// Get User Input
-for (let i = 0; i <5; i++){
-    const userChoiceDisplay = prompt("Let's play! Do you choose paper, rock or scissors?").toLowerCase(); 
-        if(userChoiceDisplay ==="paper" || userChoiceDisplay ==="rock" || userChoiceDisplay ==="scissors"){
-            console.log("Your choice: " + `${userChoiceDisplay}`);
-
-// Computer Choice If Correct User Input
-            function computerChoice() {
-                let random = ["rock", "paper", "scissors"];
-                return random[Math.floor(Math.random() * 3)];
-            }
-            var computerChoiceDisplay = computerChoice();
-            console.log("Computer's choice: ", computerChoiceDisplay);
-            var gameResult = gameRound(userChoiceDisplay, computerChoiceDisplay)  
-            console.log("Result: ", gameResult);
-
-// Warrning If Incorrect User Input 
-        } else {
-            console.log("You must input paper, rock or scissors!");   
-        }     
+const gameSummary = {
+    numbers: 0,
+    wins: 0,
+    losses: 0,
+    draws: 0,
 }
 
-// Round Of The Game
-function gameRound(userChoiceDisplay, computerChoiceDisplay) {
-    if (userChoiceDisplay === "rock") {
-        if (computerChoiceDisplay === "rock") {
+const game = {
+    playerChoice: "",
+    aiChoice: "",
+}
+
+const choices = [...document.querySelectorAll(".choices .choice")];
+
+//               Select choice function                 //
+function choiceSelection (){
+    game.playerChoice = this.dataset.option
+    console.log(this.dataset.option);
+    choices.forEach(choice => choice.style.borderColor = "black")
+    this.style.borderColor = "white";
+}
+
+
+
+
+//               Computer choice function                 //
+function aiChoice(){
+    let random = ["rock", "paper", "scissors"];
+    const aiChoice = random[Math.floor(Math.random() * 3)];
+    console.log(aiChoice);
+    return aiChoice;
+}
+
+
+function checkResult(player, ai){
+    console.log(player, ai)
+    if (player === "rock") {
+        if (ai === "rock") {
             return "Draw!";
-        } else if (computerChoiceDisplay === "paper") {
+        } else if (ai === "paper") {
             return "Computer wins!";
         } else {
             return "User wins!";
         }
-    } else if (userChoiceDisplay === "paper") {
-        if (computerChoiceDisplay === "rock") {
+    } else if (player === "paper") {
+        if (ai === "rock") {
             return "User wins!";
-        } else if (computerChoiceDisplay === "paper") {
+        } else if (ai === "paper") {
             return "Draw!";
         } else {
             return "Computer wins!";
         }
-    }  else if (computerChoiceDisplay === "rock") {
+    }  else if (ai === "rock") {
             return "Computer wins!";
-        } else if (computerChoiceDisplay === "paper") {
+        } else if (ai === "paper") {
             return "User wins!";
         } else {
             return "Draw!";
-        } 
+        }
 }
+
+//              Publish result function                   //
+function publishResult(player, ai, result){
+    document.querySelector('[data-summary="your-choice"]').textContent = player;
+    document.querySelector('[data-summary="computer-choice"]').textContent = ai;
+    document.querySelector('[data-summary="who-win"]').textContent = result;
+}
+//                  End function                         //
+function endGame(){
+    document.querySelector(`[data-option="${game.playerChoice}"]`).style.borderColor = "";
+    game.playerChoice = "";
+}
+
+//                   Start function                      //
+function startGame(){
+    if (!game.playerChoice) {return alert("You have to choose: Paper, Rock or Scissors!")
+    }
+    game.aiChoice = aiChoice();
+    const gameResult = checkResult(game.playerChoice, game.aiChoice)
+    // console.log(gameResult)
+    publishResult(game.playerChoice, game.aiChoice, gameResult)
+    endGame()
+}
+
+
+choices.forEach(choice => choice.addEventListener('click', choiceSelection))
+
+document.querySelector('.start').addEventListener('click', startGame);

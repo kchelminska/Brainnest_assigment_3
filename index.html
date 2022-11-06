@@ -10,7 +10,19 @@
 </head>
 <body>
     <h1>Game - Rock, Paper or Scissors</h1>
-    <h2>The game is played in a loop in the console</h2>
+    <h2>Let's see who win this time!</h2>
+    <div class="choices">
+        <div data-option = "paper" class="choice">Paper</div>
+        <div data-option = "rock" class="choice">Rock</div>
+        <div data-option = "scissors" class="choice">Scissors</div>
+    </div>
+    <button class="start">Let's play!</button>
+    <div>
+        <p>Your choice:<span data-summary="your-choice"></span></p>
+        <p>Computer choice:<span data-summary="computer-choice"></span></p>
+        <h1>The winner is:<span data-summary="who-win"></span></h1>
+        <h2>...</h2>
+    </div>
     <script src="./javascript/script.js"></script>
 </body>
 </html>

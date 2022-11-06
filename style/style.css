@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 body{
     display: flex;
     flex-direction: column;
@@ -17,4 +20,29 @@ h2{
     color:rgb(240, 85, 28);
     font-size: 15px;
     margin-top: 20px;
+}
+
+.choice {
+    width: 140px;
+    height: 80px;
+    margin: 50px 10px;
+    float: left;
+    background-color: rgb(240, 85, 28);
+    border: 5px solid black;
+    color: white;
+    line-height: 80px;
+}
+
+button{
+    border: 5px solid white;
+    background-color: rgb(240, 85, 28);
+    font-size: 10px;
+    line-height: 30px;
+    font-family: 'Press Start 2P', cursive;
+    transition: 0.4s;
+}
+
+button:hover{
+    border-color:  rgb(240, 85, 28);
+    transition: 0.4s;
 }

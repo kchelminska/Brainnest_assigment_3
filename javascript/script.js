@@ -9,7 +9,6 @@ const game = {
     playerChoice: "",
     aiChoice: "",
 }
-
 const choices = [...document.querySelectorAll(".choices .choice")];
 
 //               Select choice function                 //
@@ -20,9 +19,6 @@ function choiceSelection (){
     this.style.borderColor = "white";
 }
 
-
-
-
 //               Computer choice function                 //
 function aiChoice(){
     let random = ["rock", "paper", "scissors"];
@@ -30,7 +26,6 @@ function aiChoice(){
     console.log(aiChoice);
     return aiChoice;
 }
-
 
 function checkResult(player, ai){
     console.log(player, ai)
@@ -65,6 +60,7 @@ function publishResult(player, ai, result){
     document.querySelector('[data-summary="computer-choice"]').textContent = ai;
     document.querySelector('[data-summary="who-win"]').textContent = result;
 }
+
 //                  End function                         //
 function endGame(){
     document.querySelector(`[data-option="${game.playerChoice}"]`).style.borderColor = "";
@@ -82,7 +78,5 @@ function startGame(){
     endGame()
 }
 
-
 choices.forEach(choice => choice.addEventListener('click', choiceSelection))
-
 document.querySelector('.start').addEventListener('click', startGame);
